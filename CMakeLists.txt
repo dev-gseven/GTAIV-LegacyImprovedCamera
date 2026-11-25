@@ -9,6 +9,8 @@ add_library(ImprovedVehicleCam SHARED
     src/config/Config.cpp
     src/camera/CoverCentering.h
     src/camera/CoverCentering.cpp
+    src/camera/FenceClimbCamera.h
+    src/camera/FenceClimbCamera.cpp
     src/camera/VehicleStuntJump.h
     src/camera/VehicleStuntJump.cpp
     src/camera/VehicleTheftCamera.h
@@ -94,6 +96,10 @@ add_custom_command(TARGET ImprovedVehicleCam POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E echo ";Camera Center in Cover." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
     COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
     COMMAND ${CMAKE_COMMAND} -E echo "CameraCenterInCover=0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";Fence Climb Camera." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "FenceClimbCamera=0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
     # Copy licenses folder
     COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/licenses" "$<TARGET_FILE_DIR:ImprovedVehicleCam>/licenses"
     VERBATIM

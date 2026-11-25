@@ -37,6 +37,7 @@ namespace Config
         cfg.vehKbYTurn = Setting("VehicleYTurnSpeed", 6, 1, 9);
         cfg.theftCam = Setting("VehicleTheftCam", 0, 0, 1);
         cfg.stuntJump = Setting("VehicleStuntJump", 0, 0, 1);
+        cfg.fenceClimb = Setting("FenceClimbCamera", 0, 0, 1);
         cfg.coverCentering = Setting("CameraCenterInCover", 0, 0, 1);
     }
 }

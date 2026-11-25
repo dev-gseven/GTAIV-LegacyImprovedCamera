@@ -6,6 +6,7 @@
 #include "VehicleTheftCamera.h"
 #include "VehicleStuntJump.h"
 #include "CoverCentering.h"
+#include "FenceClimbCamera.h"
 
 namespace
 {
@@ -19,6 +20,7 @@ namespace
         Camera::InstallTheftCamera();
         Camera::InstallVehicleStuntJump();
         Camera::InstallCoverCentering();
+        Camera::InstallFenceClimb();
 
         installed = true;
     }

@@ -10,6 +10,7 @@ namespace Config
         bool theftCam;
         bool stuntJump;
         bool coverCentering;
+        bool fenceClimb;
     };
 
     extern Settings cfg;
