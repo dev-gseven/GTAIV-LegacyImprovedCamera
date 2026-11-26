@@ -1,9 +1,9 @@
 
 cmake_minimum_required(VERSION 3.21)
 
-project(ImprovedVehicleCam LANGUAGES C CXX)
+project(IVLegacyImprovedCamera LANGUAGES C CXX)
 
-add_library(ImprovedVehicleCam SHARED
+add_library(IVLegacyImprovedCamera SHARED
     src/main.cpp
     src/config/Config.h
     src/config/Config.cpp
@@ -32,15 +32,15 @@ add_library(ImprovedVehicleCam SHARED
     external/injector/safetyhook/src/vmt_hook.cpp
 )
 
-target_compile_features(ImprovedVehicleCam PRIVATE cxx_std_23)
+target_compile_features(IVLegacyImprovedCamera PRIVATE cxx_std_23)
 
-target_compile_definitions(ImprovedVehicleCam PRIVATE
+target_compile_definitions(IVLegacyImprovedCamera PRIVATE
     WIN32_LEAN_AND_MEAN
     NOMINMAX
     NDEBUG
 )
 
-target_include_directories(ImprovedVehicleCam PRIVATE
+target_include_directories(IVLegacyImprovedCamera PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/config"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/camera"
@@ -52,55 +52,55 @@ target_include_directories(ImprovedVehicleCam PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/external/injector/injector"
 )
 
-set_target_properties(ImprovedVehicleCam PROPERTIES
+set_target_properties(IVLegacyImprovedCamera PROPERTIES
     PREFIX ""
     SUFFIX ".asi"
-    OUTPUT_NAME "ImprovedVehicleCam"
+    OUTPUT_NAME "IVLegacyImprovedCamera"
 )
 
 if(MSVC)
-    target_compile_options(ImprovedVehicleCam PRIVATE
+    target_compile_options(IVLegacyImprovedCamera PRIVATE
         /W3
         /O2
         /MT
     )
 
-    target_link_options(ImprovedVehicleCam PRIVATE
+    target_link_options(IVLegacyImprovedCamera PRIVATE
         /MACHINE:X86
     )
 endif()
 
 if(NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
-    message(FATAL_ERROR "ImprovedVehicleCam needs to be compiled in 32 bits (x86).")
+    message(FATAL_ERROR "IVLegacyImprovedCamera needs to be compiled in 32 bits (x86).")
 endif()
 
-add_custom_command(TARGET ImprovedVehicleCam POST_BUILD
+add_custom_command(TARGET IVLegacyImprovedCamera POST_BUILD
     # Create .ini file
-    COMMAND ${CMAKE_COMMAND} -E echo "[Camera]" > "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";Horizontal camera turn speed." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";1 to 9 - Default is 8" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "VehicleXTurnSpeed=8" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";Vertical camera turn speed." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";1 to 9 - Default is 6" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "VehicleYTurnSpeed=6" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";Vehicle Theft Camera." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "VehicleTheftCam=0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";Vehicle Stunt Camera." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "VehicleStuntJump=0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";Camera Center in Cover." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "CameraCenterInCover=0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";Fence Climb Camera." >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
-    COMMAND ${CMAKE_COMMAND} -E echo "FenceClimbCamera=0" >> "$<TARGET_FILE_DIR:ImprovedVehicleCam>/ImprovedVehicleCam.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "[Camera]" > "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";Horizontal camera turn speed." >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";1 to 9 - Default is 8" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "VehicleXTurnSpeed=8" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";Vertical camera turn speed." >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";1 to 9 - Default is 6" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "VehicleYTurnSpeed=6" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";Vehicle Theft Camera." >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "VehicleTheftCam=0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";Vehicle Stunt Camera." >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "VehicleStuntJump=0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";Camera Center in Cover." >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "CameraCenterInCover=0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";Fence Climb Camera." >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo ";0 or 1 - Default is 0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
+    COMMAND ${CMAKE_COMMAND} -E echo "FenceClimbCamera=0" >> "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/IVLegacyImprovedCamera.ini"
     # Copy licenses folder
-    COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/licenses" "$<TARGET_FILE_DIR:ImprovedVehicleCam>/licenses"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/licenses" "$<TARGET_FILE_DIR:IVLegacyImprovedCamera>/licenses"
     VERBATIM
 )
